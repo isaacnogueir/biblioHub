@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>BookHub</title>
+  </head>
+
+  <body>
+    <div class="formulario">
+      <h1>Login</h1>
+      <form action="#">
+       
+        <div class="caixa-formulario">
+          <input type="text" placeholder="Nome de usuário" required />
+        </div>
+
+        <div class="caixa-formulario">
+          <input type="password" placeholder="Senha" required />
+        </div>
+        
+        <div class="caixa-lembrar-esqueci">
+          <label><input type="checkbox"> Lembrar</label>
+          <a href="#">Esqueci minha senha</a>
+        </div>
+
+        <div class="caixa-botoes">
+           <button type="submit" class="entrar">Entrar</button>
+           <button type="button" class="retornar" id="retornar">Retornar</button>
+        </div>
+
+        <div class="link-registro">
+        <p>Não tem conta? <a href="registrar.html"> Registrar</a></p>
+        </div>
+      </form>
+
+     <script>
+        document.getElementById("retornar").addEventListener("click",()=>{
+            window.location.href="index.html";
+        });
+     </script>
+
+    </div>
+  </body>
+</html>

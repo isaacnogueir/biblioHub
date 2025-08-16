@@ -1,0 +1,121 @@
+/* Mantém a fonte e reset básico */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Source Sans 3", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #103f49 0%, #000000 100%);
+}
+
+.formulario,
+.form-inicial{
+    width: 350px;
+    background-color: linear-gradient(135deg, #103f49 0%, #000000 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+}
+
+.formulario h1 {
+    font-size: 30px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.caixa-formulario {
+    margin-bottom: 10px;
+}
+
+.caixa-formulario input,
+.caixa-formulario select {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    background-color: #ffffff; /* fundo branco */
+    color: #000000;            /* texto preto */
+    font-size: 15px;
+    padding: 0 10px;
+}
+
+.caixa-formulario input::placeholder,
+.caixa-formulario select option:first-child {
+    color: rgba(0,0,0,0.5); /* placeholder mais claro */
+}
+
+.caixa-formulario input:focus,
+.caixa-formulario select:focus {
+    border-color: #145c66;
+    box-shadow: 0 0 5px rgba(20,92,102,0.5);
+}
+
+.caixa-lembrar-esqueci {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.caixa-lembrar-esqueci a {
+    color: rgba(255, 255, 255, 255);
+    text-decoration: none;
+}
+
+.caixa-lembrar-esqueci a:hover {
+    text-decoration: underline;
+}
+
+.caixa-botoes {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.caixa-botoes button {
+    flex: 1;
+    background: linear-gradient(45deg, #145c66, #103f49);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.caixa-botoes button:hover {
+    background-color: rgba(255, 255, 255, 255);
+    transform: translateY(-3px);
+}
+
+.link-registro {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 255);
+}
+
+.link-registro a {
+    color: rgba(255, 255, 255, 255);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-registro a:hover {
+    text-decoration: underline;
+}

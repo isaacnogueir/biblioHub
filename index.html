@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>BookHub</title>
+  </head>
+
+  <body>
+    <!-- Conteúdo central -->
+    <div class="form-inicial">
+      <h1>📚 BiblioHub</h1>
+      <form action="#">
+      <p>Bem-vindo à nossa biblioteca online!</p>
+      <div class="caixa-botoes">
+        <button type="button" class="registrar" id="registrar">Registrar-se</button>
+        <button type="button" class="retornar" id="login">Login</button>
+      </div>
+    </div>
+    </form>
+
+    <!-- Scripts -->
+    <script>
+      document.getElementById("registrar").addEventListener("click", () => {
+        window.location.href = "registrar.html";
+      });
+      document.getElementById("login").addEventListener("click", () => {
+        window.location.href = "login.html";
+      });
+    </script>
+  </body>
+</html>
