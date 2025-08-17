@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Área Administrativa</title>
+  </head>
+
+  <body class="dashboard">
+    <nav class="navbar">
+      <div class="logo">Biblioteca</div>
+      <ul class="navbar-links">
+        <li><a href="#" onclick="trocarSecao('home')">Home</a></li>
+        <li><a href="#" onclick="trocarSecao('livros')">Livros</a></li>
+        <li>
+          <a href="#" onclick="trocarSecao('emprestimos')">Emprestimos</a>
+        </li>
+        <li><a href="#" onclick="trocarSecao('usuarios')">Usuários</a></li>
+      </ul>
+      <button type="button" class="sair" id="sair">Logout</button>
+    </nav>
+
+    <div class="dashboard-container">
+      <div id="home" class="secao ativa">
+        <div class="cabecalho-dashboard">
+          <h1>Bem vindo à Biblioteca virtual</h1>
+        </div>
+        <p>Escolha uma opção do menu acima para começar.</p>
+      </div>
+
+      <!--SECAO LIVROS-->
+      <div id="livros" class="secao">
+        <div class="cabecalho-dashboard">
+          <h1>Gerenciar Livros</h1>
+        </div>
+
+        <div class="cards-dashboard">
+          <div class="card">
+            <h3>Adicionar Livro</h3>
+            <p>Cadastrar novo livro</p>
+            <button onclick="trocarSecao('adicionar-livro')">Adicionar</button>
+          </div>
+          <div class="card">
+            <h3>Ver todos</h3>
+            <p>Lista completa</p>
+            <button>Ver Lista</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECAO ADICIONAR LIVRO -->
+
+      <div id="adicionar-livro" class="secao">
+        <div class="cabecalho-dashboard">
+          <h1>Adicionar Novo livro</h1>
+        </div>
+
+        <div class="formulario-livro">
+          <form id="form-livro">
+            <div class="campo">
+              <label for="titulo">Título: </label>
+              <input type="text" id="title" name="title" required />
+            </div>
+
+            <div class="campo">
+              <label for="author">Autor: </label>
+              <input type="text" id="author" name="author" required />
+            </div>
+
+            <div class="campo">
+              <label for="publisher">Editora: </label>
+              <input type="text" id="publisher" name="publisher" required />
+            </div>
+
+            <div class="campo">
+              <label for="publishedDate">Ano de publicação: </label>
+              <input type="number" id="publishedDate" name="publishedDate" required />
+            </div>
+
+            <div class="campo">
+              <label for="isbn">ISBN: </label>
+              <input type="text" id="isbn" name="isbn" required />
+            </div>
+
+            <div class="campo">
+              <label for="description">Descrição: </label>
+              <input type="text" id="description" name="description" required />
+            </div>
+
+            <div class="campo">
+              <label for="pageCount">Número de páginas: </label>
+              <input type="number" id="pageCount" name="pageCount" required />
+            </div>
+
+            <div class="campo">
+              <label for="googleBooksId">Id Google: </label>
+              <input type="text" id="googleBooksId" name="googleBooksId" />
+            </div>
+
+            <div class="caixa-botoes">
+                <button type="button" onclick="trocarSecao('livros')" class="botao-voltar">
+                      ← Voltar
+                </button>
+                
+                <button type="submit" class="botaoo-salvar">
+                    💾 Salvar Livro
+                </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      
+      <!--SESSAO EMPRESTIMOS-->
+
+      <div id="emprestimos" class="secao">
+        <div class="cabecalho-dashboard">
+          <h1>Gerenciar Empréstimos</h1>
+        </div>
+        <div class="cards-dashboard">
+          <div class="card">
+            <h3>Efetuar empréstimo</h3>
+            <p>Criar novo empréstimo</p>
+            <button>Efetuar</button>
+          </div>
+          <div class="card">
+            <h3>Ver todos</h3>
+            <p>Lista completa</p>
+            <button>Ver Lista</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSAO USUARIOS-->
+
+      <div id="usuarios" class="secao">
+        <div class="cabecalho-dashboard">
+          <h1>Gerenciar Usuários</h1>
+        </div>
+        <div class="cards-dashboard">
+          <div class="card">
+            <h3>Criar usuário</h3>
+            <p>Criar novo usuário</p>
+            <button>Criar</button>
+          </div>
+          <div class="card">
+            <h3>Devoluções</h3>
+            <p>Controlar Devoluções</p>
+            <button>Ver Devoluções</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function trocarSecao(novaSecao) {
+          console.log("Clicou em:", novaSecao);
+
+          const todasAsSecoes = document.querySelectorAll(".secao");
+
+          todasAsSecoes.forEach((secao) => {
+            secao.classList.remove("ativa"); // ← CORREÇÃO AQUI
+          });
+
+          const secaoEscolhida = document.getElementById(novaSecao);
+          secaoEscolhida.classList.add("ativa");
+        }
+
+        // deixa a função acessível globalmente
+        window.trocarSecao = trocarSecao;
+
+        // botão sair
+        document.getElementById("sair").addEventListener("click", () => {
+          window.location.href = "index.html";
+        });
+      });
+
+      // ============ FUNCIONALIDADE DO FORMULÁRIO
+      document.getElementById('form-livro').addEventListener('submit', function() {
+        event.preventDefault();
+
+        console.log('Enviando livros para o backend');
+
+        const formData = new FormData(this);
+
+        const bookData = {
+            title: formData.get('title'),
+        authors: formData.get('author'), // Note: sua API espera "authors"
+        publisher: formData.get('publisher'),
+        publishedDate: formData.get('publishedDate'),
+        isbn10: formData.get('isbn'), // Você só tem um campo ISBN, vou colocar no isbn10
+        isbn13: null, // ou formData.get('isbn13') se você adicionar o campo
+        description: formData.get('description'),
+        pageCount: formData.get('pageCount') ? parseInt(formData.get('pageCount')) : null,
+        googleBooksId: formData.get('googleBooksId'),
+        status: 'AVAILABLE' // Sempre AVAILABLE quando criar
+        };
+
+            console.log('📋 Dados a serem enviados:', bookData);
+
+            const token = localStorage.getItem('authToken');
+
+            if(!token){
+                alert('Erro: Você precisa estar logado para criar livros');
+            }
+
+
+            fetch('http://localhost:8080/api/books/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization': 'Bearer ${token}'
+                },
+                body: JSON.stringify(bookData)
+            })
+            .then(Response => {
+                if(Response.ok){
+                    return Response.json();
+                }else{
+                    throw new Error('Erro HTTP: ${response.status}');
+                }
+            })
+
+            .then(data => {
+                console.log('Livro criado', data);
+                alert('Livro "${data.title}" cadastrado com sucesso!`');
+
+                document.getElementById('form-livro').reset();
+                trocarSecao('livros');
+            })
+           
+            .catch(error => {
+                console.error('❌ Erro:', error);
+        alert('❌ Erro ao criar livro. Verifique os dados!');
+    });
+});
+    </script>
+  </body>
+</html>

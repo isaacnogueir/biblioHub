@@ -3,39 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <title>BookHub - Cadastro</title>
   </head>
-
   <body>
     <div class="formulario">
       <h1>Cadastro</h1>
-      <form>
-
+      <form class="form-cadastro">
         <div class="caixa-formulario">
           <input type="text" id="nome" name="nome" placeholder="Nome" required />
         </div>
-
         <div class="caixa-formulario">
           <input type="email" id="email" name="email" placeholder="E-mail" required />
         </div>
-
         <div class="caixa-formulario">
           <input type="text" id="login" name="login" placeholder="Login" required />
         </div>
-
         <div class="caixa-formulario">
           <input type="password" id="senha" name="password" placeholder="Senha" required />
         </div>
-
         <div class="caixa-formulario">
           <input type="text" id="endereco" name="endereco" placeholder="Endereço" required />
         </div>
-
         <div class="caixa-formulario">
           <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" required />
         </div>
-
         <div class="caixa-formulario">
           <select id="tipo" name="tipo" required>
             <option value="">Selecione o tipo de usuário</option>
@@ -44,100 +36,79 @@
             <option value="usuario">Usuário Comum</option>
           </select>
         </div>
-
         <div class="caixa-botoes">
-          <button type="submit" class="cadastrar">Cadastrar</button>
+          <button type="submit" class="cadastrar" id="cadastrado">Cadastrar</button>
           <button type="button" class="retornar" id="voltar">Retornar</button>
         </div>
-
         <div class="link-registro">
           <p>Já tem conta? <a href="login.html">Entrar</a></p>
         </div>
       </form>
 
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          
-          // Botão voltar
+        document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("voltar").addEventListener("click", () => {
             window.location.href = "index.html";
           });
 
           async function cadastrarUsuario(event) {
             event.preventDefault();
-            
-            // ✅ CORRIGIDO - usando 'senha' em vez de 'password'
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const login = document.getElementById('login').value;
-            const password = document.getElementById('senha').value; // ← CORRIGIDO AQUI
-            const endereco = document.getElementById('endereco').value;
-            const telefone = document.getElementById('telefone').value;
+
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const login = document.getElementById("login").value;
+            const password = document.getElementById("senha").value;
+            const endereco = document.getElementById("endereco").value;
+            const telefone = document.getElementById("telefone").value;
             const tipo = document.getElementById("tipo").value;
 
-            // Validação básica
             if (!nome || !email || !login || !password || !endereco || !telefone || !tipo) {
-              alert('Todos os campos são obrigatórios!');
+              alert("Todos os campos são obrigatórios!");
               return;
             }
 
             let role;
-            switch(tipo) {
-              case 'admin':
-                role = 'ADMIN';
+            switch (tipo) {
+              case "admin":
+                role = "ADMIN";
                 break;
-              case 'bibliotecario':
-                role = 'BIBLIOTECARIO';
+              case "bibliotecario":
+                role = "LIBRARIAN";
                 break;
-              case 'usuario':
-                role = 'USER';
+              case "usuario":
+                role = "USER";
                 break;
               default:
-                role = 'USER';
+                role = "USER";
             }
 
-            const dadosUser = {
-              nome: nome,
-              email: email,
-              login: login,
-              password: password,
-              endereco: endereco,
-              telefone: telefone,
-              role: role
-            };
-
-            console.log('Dados a serem enviados:', dadosUser); // Debug
+            const dadosUser = { nome, email, login, password, endereco, telefone, role };
+            console.log("Dados a serem enviados:", dadosUser);
 
             try {
-              const response = await fetch('http://localhost:8080/auth/register', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
+              const response = await fetch("http://localhost:8080/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosUser)
               });
 
               if (response.ok) {
-                const resultado = await response.json();
-                alert('Usuário cadastrado com sucesso!');
-                document.querySelector('form').reset();
-                // Opcional: redirecionar após sucesso
-                //window.location.href = "login.html";
+                await response.json();
+                alert("Usuário cadastrado com sucesso!");
+                document.querySelector(".form-cadastro").reset();
+                window.location.href = "login.html";
               } else {
                 const erro = await response.text();
-                console.error('Erro do servidor:', erro);
-                alert('Erro ao cadastrar: ' + erro);
+                console.error("Erro do servidor:", erro);
+                alert("Erro ao cadastrar: " + erro);
               }
-
-            } catch(error) {
-              console.error('Erro de conexão:', error);
-              alert('Erro de conexão com o servidor');
+            } catch (error) {
+              console.error("Erro de conexão:", error);
+              alert("Erro de conexão com o servidor");
             }
           }
 
-          // Event listener do form
-          document.querySelector('form').addEventListener('submit', cadastrarUsuario);
-          
+          document.querySelector(".form-cadastro").addEventListener("submit", cadastrarUsuario);
         });
       </script>
     </div>

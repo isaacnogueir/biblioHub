@@ -3,44 +3,83 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <title>BookHub</title>
   </head>
-
   <body>
     <div class="formulario">
       <h1>Login</h1>
-      <form action="#">
-       
+      <form class="form-login">
         <div class="caixa-formulario">
-          <input type="text" placeholder="Nome de usuário" required />
+          <input type="text" id="login" placeholder="Nome de usuário" required />
         </div>
-
         <div class="caixa-formulario">
-          <input type="password" placeholder="Senha" required />
+          <input type="password" id="senha" placeholder="Senha" required />
         </div>
-        
         <div class="caixa-lembrar-esqueci">
-          <label><input type="checkbox"> Lembrar</label>
+          <label><input type="checkbox" /> Lembrar</label>
           <a href="#">Esqueci minha senha</a>
         </div>
-
         <div class="caixa-botoes">
-           <button type="submit" class="entrar">Entrar</button>
-           <button type="button" class="retornar" id="retornar">Retornar</button>
+          <button type="submit" class="entrar">Entrar</button>
+          <button type="button" class="retornar" id="retornar">Retornar</button>
         </div>
-
         <div class="link-registro">
-        <p>Não tem conta? <a href="registrar.html"> Registrar</a></p>
+          <p>Não tem conta? <a href="registrar.html">Registrar</a></p>
         </div>
       </form>
 
-     <script>
-        document.getElementById("retornar").addEventListener("click",()=>{
-            window.location.href="index.html";
-        });
-     </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          document.getElementById("retornar").addEventListener("click", () => {
+            window.location.href = "index.html";
+          });
 
+          async function loginUsuario(event) {
+            event.preventDefault();
+
+            const login = document.getElementById("login").value;
+            const password = document.getElementById("senha").value;
+
+            if (!login || !password) {
+              alert("Todos os campos são necessários!");
+              return;
+            }
+
+            const dadosLogin = { login, password };
+            console.log("Dados a serem enviados:", dadosLogin);
+
+            try {
+              const response = await fetch("http://localhost:8080/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dadosLogin),
+              });
+
+              if (response.ok) {
+                const { token, role } = await response.json();
+                localStorage.setItem("token", token);
+                localStorage.setItem("role", role);
+
+                alert("Usuário logado com sucesso!");
+
+                setTimeout(() => {
+                  window.location.href = "dashboard.html";
+                }, 1500);
+              } else {
+                const erro = await response.text();
+                console.error("Erro do servidor:", erro);
+                alert("Erro ao fazer login: " + erro);
+              }
+            } catch (error) {
+              console.error("Erro de conexão:", error);
+              alert("Erro de conexão com o servidor");
+            }
+          }
+
+          document.querySelector(".form-login").addEventListener("submit", loginUsuario);
+        });
+      </script>
     </div>
   </body>
 </html>

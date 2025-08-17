@@ -1,4 +1,4 @@
-/* Mantém a fonte e reset básico */
+/* ==================== RESET + FONTE ==================== */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
@@ -8,18 +8,28 @@
     font-family: "Source Sans 3", sans-serif;
 }
 
+/* ==================== BODY ==================== */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(135deg, #103f49 0%, #000000 100%);
+    padding-top: 70px; /* espaço para a navbar fixa */
 }
 
+/* ==================== BODY DASHBOARD ==================== */
+body.dashboard {
+    display: block;
+    background: #f5f5f5;
+    padding-top: 80px;
+}
+
+/* ==================== FORMULÁRIOS ==================== */
 .formulario,
-.form-inicial{
+.form-inicial {
     width: 350px;
-    background-color: linear-gradient(135deg, #103f49 0%, #000000 100%);
+    background: rgba(16, 63, 73, 0.4); /* transparente com blur */
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(6px);
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
@@ -46,15 +56,15 @@ body {
     border: 1px solid #ccc;
     border-radius: 8px;
     outline: none;
-    background-color: #ffffff; /* fundo branco */
-    color: #000000;            /* texto preto */
+    background-color: #ffffff;
+    color: #000000;
     font-size: 15px;
     padding: 0 10px;
 }
 
 .caixa-formulario input::placeholder,
 .caixa-formulario select option:first-child {
-    color: rgba(0,0,0,0.5); /* placeholder mais claro */
+    color: rgba(0,0,0,0.5);
 }
 
 .caixa-formulario input:focus,
@@ -72,7 +82,7 @@ body {
 }
 
 .caixa-lembrar-esqueci a {
-    color: rgba(255, 255, 255, 255);
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -101,17 +111,18 @@ body {
 }
 
 .caixa-botoes button:hover {
-    background-color: rgba(255, 255, 255, 255);
+    background-color: #ffffff;
+    color: #103f49;
     transform: translateY(-3px);
 }
 
 .link-registro {
     font-size: 14px;
-    color: rgba(255, 255, 255, 255);
+    color: #ffffff;
 }
 
 .link-registro a {
-    color: rgba(255, 255, 255, 255);
+    color: #ffffff;
     font-weight: bold;
     text-decoration: none;
 }
@@ -119,3 +130,266 @@ body {
 .link-registro a:hover {
     text-decoration: underline;
 }
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #103f49 0%, #000000 100%);
+    padding: 12px 25px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-weight: bold;
+    font-size: 1.8em;
+    letter-spacing: 1px;
+}
+
+.navbar .nav-links,
+.navbar .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.navbar .nav-links li a,
+.navbar .navbar-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar .nav-links li a:hover,
+.navbar .navbar-links li a:hover {
+    background-color: white;
+    color: #103f49;
+    transform: translateY(-2px);
+}
+
+/* ==================== BOTÃO LOGOUT ==================== */
+.sair {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sair:hover {
+    background: #ff3742;
+    transform: translateY(-2px);
+}
+
+/* ==================== DASHBOARD SIMPLES ==================== */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.dashboard-header h1 {
+    color: #103f49;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card h3 {
+    color: #103f49;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.card button {
+    background: #103f49;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.card button:hover {
+    background: #145c66;
+}
+
+/* ==================== SEÇÕES DO DASHBOARD ==================== */
+.secao {
+    display: none;
+}
+
+.secao.ativa {
+    display: block;
+}
+
+.cabecalho-dashboard h1 {
+    color: #103f49;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
+.cards-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* ==================== FORMULÁRIO DE LIVROS (usando classes existentes) ==================== */
+.formulario-livro {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    color: #103f49;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Seus inputs já têm estilo em .caixa-formulario input, vamos reaproveitar */
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 15px;
+    padding: 0 10px;
+}
+
+.campo textarea {
+    height: 80px;
+    padding: 10px;
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: #145c66;
+    box-shadow: 0 0 5px rgba(20,92,102,0.5);
+}
+
+.campos-linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.campos-linha .campo {
+    margin-bottom: 0;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .campos-linha {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== RESPONSIVO ==================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .navbar .nav-links,
+    .navbar .navbar-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 15px;
+    }
+    
+    .sair {
+        order: 2;
+    }
+
+    body.dashboard {
+        padding-top: 120px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .navbar .nav-links,
+    .navbar .navbar-links {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .navbar .nav-links li a,
+    .navbar .navbar-links li a {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .sair {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    body.dashboard {
+        padding-top: 160px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
