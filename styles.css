@@ -393,3 +393,143 @@ body.dashboard {
     }
 }
 
+/* Lista de Livros - Versão Simples */
+
+/* Ações no topo */
+.acoes-lista {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.botao-voltar, .botao-atualizar, .botao {
+    background: #103f49;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botao-voltar:hover, .botao-atualizar:hover {
+    background: #145c66;
+}
+
+/* Grid da lista */
+.lista-livros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Card do livro */
+.card-livro {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-left: 3px solid #103f49;
+}
+
+.card-livro:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Título */
+.livro-titulo {
+    color: #103f49;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Informações */
+.livro-info p {
+    color: #666;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.livro-info strong {
+    color: #103f49;
+    font-weight: 600;
+}
+
+/* Descrição */
+.livro-descricao {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.livro-descricao > p:first-child {
+    color: #103f49;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.descricao-texto {
+    color: #666;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* Botões de ação */
+.card-acoes {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.card-acoes button {
+    flex: 1;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.botao-editar { background: #ffc107; color: #212529; }
+.botao-excluir { background: #dc3545; color: white; }
+
+/* Estados especiais */
+.mensagem-vazia, .carregamento, .erro-livros {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.mensagem-vazia h3, .carregamento h3, .erro-livros h3 {
+    color: #103f49;
+    margin-bottom: 15px;
+}
+
+.botao-adicionar-primeiro, .botao-tentar-novamente {
+    background: #103f49;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .lista-livros {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .acoes-lista {
+        flex-direction: column;
+    }
+    
+    .card-acoes {
+        flex-direction: column;
+    }
+}

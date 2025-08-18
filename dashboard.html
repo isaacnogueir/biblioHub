@@ -1,241 +1,262 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Área Administrativa</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Área Administrativa</title>
+</head>
 
-  <body class="dashboard">
-    <nav class="navbar">
-      <div class="logo">Biblioteca</div>
-      <ul class="navbar-links">
-        <li><a href="#" onclick="trocarSecao('home')">Home</a></li>
-        <li><a href="#" onclick="trocarSecao('livros')">Livros</a></li>
-        <li>
-          <a href="#" onclick="trocarSecao('emprestimos')">Emprestimos</a>
-        </li>
-        <li><a href="#" onclick="trocarSecao('usuarios')">Usuários</a></li>
-      </ul>
-      <button type="button" class="sair" id="sair">Logout</button>
-    </nav>
+<body class="dashboard">
+<nav class="navbar">
+  <div class="logo">Biblioteca</div>
+  <ul class="navbar-links">
+    <li><a href="#" onclick="trocarSecao('home')">Home</a></li>
+    <li><a href="#" onclick="trocarSecao('livros')">Livros</a></li>
+    <li><a href="#" onclick="trocarSecao('emprestimos')">Empréstimos</a></li>
+    <li><a href="#" onclick="trocarSecao('usuarios')">Usuários</a></li>
+  </ul>
+  <button type="button" class="sair" id="sair">Logout</button>
+</nav>
 
-    <div class="dashboard-container">
-      <div id="home" class="secao ativa">
-        <div class="cabecalho-dashboard">
-          <h1>Bem vindo à Biblioteca virtual</h1>
-        </div>
-        <p>Escolha uma opção do menu acima para começar.</p>
+<div class="dashboard-container">
+  <!-- SECAO HOME -->
+  <div id="home" class="secao ativa">
+    <div class="cabecalho-dashboard"><h1>Bem vindo à Biblioteca virtual</h1></div>
+    <p>Escolha uma opção do menu acima para começar.</p>
+  </div>
+
+  <!-- SECAO LIVROS -->
+  <div id="livros" class="secao">
+    <div class="cabecalho-dashboard"><h1>Gerenciar Livros</h1></div>
+    <div class="cards-dashboard">
+      <div class="card">
+        <h3>Adicionar Livro</h3>
+        <p>Cadastrar novo livro</p>
+        <button onclick="trocarSecao('adicionar-livro')">Adicionar</button>
       </div>
-
-      <!--SECAO LIVROS-->
-      <div id="livros" class="secao">
-        <div class="cabecalho-dashboard">
-          <h1>Gerenciar Livros</h1>
-        </div>
-
-        <div class="cards-dashboard">
-          <div class="card">
-            <h3>Adicionar Livro</h3>
-            <p>Cadastrar novo livro</p>
-            <button onclick="trocarSecao('adicionar-livro')">Adicionar</button>
-          </div>
-          <div class="card">
-            <h3>Ver todos</h3>
-            <p>Lista completa</p>
-            <button>Ver Lista</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECAO ADICIONAR LIVRO -->
-
-      <div id="adicionar-livro" class="secao">
-        <div class="cabecalho-dashboard">
-          <h1>Adicionar Novo livro</h1>
-        </div>
-
-        <div class="formulario-livro">
-          <form id="form-livro">
-            <div class="campo">
-              <label for="titulo">Título: </label>
-              <input type="text" id="title" name="title" required />
-            </div>
-
-            <div class="campo">
-              <label for="author">Autor: </label>
-              <input type="text" id="author" name="author" required />
-            </div>
-
-            <div class="campo">
-              <label for="publisher">Editora: </label>
-              <input type="text" id="publisher" name="publisher" required />
-            </div>
-
-            <div class="campo">
-              <label for="publishedDate">Ano de publicação: </label>
-              <input type="number" id="publishedDate" name="publishedDate" required />
-            </div>
-
-            <div class="campo">
-              <label for="isbn">ISBN: </label>
-              <input type="text" id="isbn" name="isbn" required />
-            </div>
-
-            <div class="campo">
-              <label for="description">Descrição: </label>
-              <input type="text" id="description" name="description" required />
-            </div>
-
-            <div class="campo">
-              <label for="pageCount">Número de páginas: </label>
-              <input type="number" id="pageCount" name="pageCount" required />
-            </div>
-
-            <div class="campo">
-              <label for="googleBooksId">Id Google: </label>
-              <input type="text" id="googleBooksId" name="googleBooksId" />
-            </div>
-
-            <div class="caixa-botoes">
-                <button type="button" onclick="trocarSecao('livros')" class="botao-voltar">
-                      ← Voltar
-                </button>
-                
-                <button type="submit" class="botaoo-salvar">
-                    💾 Salvar Livro
-                </button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      
-      <!--SESSAO EMPRESTIMOS-->
-
-      <div id="emprestimos" class="secao">
-        <div class="cabecalho-dashboard">
-          <h1>Gerenciar Empréstimos</h1>
-        </div>
-        <div class="cards-dashboard">
-          <div class="card">
-            <h3>Efetuar empréstimo</h3>
-            <p>Criar novo empréstimo</p>
-            <button>Efetuar</button>
-          </div>
-          <div class="card">
-            <h3>Ver todos</h3>
-            <p>Lista completa</p>
-            <button>Ver Lista</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SESSAO USUARIOS-->
-
-      <div id="usuarios" class="secao">
-        <div class="cabecalho-dashboard">
-          <h1>Gerenciar Usuários</h1>
-        </div>
-        <div class="cards-dashboard">
-          <div class="card">
-            <h3>Criar usuário</h3>
-            <p>Criar novo usuário</p>
-            <button>Criar</button>
-          </div>
-          <div class="card">
-            <h3>Devoluções</h3>
-            <p>Controlar Devoluções</p>
-            <button>Ver Devoluções</button>
-          </div>
-        </div>
+      <div class="card">
+        <h3>Ver todos</h3>
+        <p>Lista completa</p>
+        <button onclick="trocarSecao('listar-livros'); listarLivros();">Ver Lista</button>
       </div>
     </div>
+  </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        function trocarSecao(novaSecao) {
-          console.log("Clicou em:", novaSecao);
+  <!-- SECAO ADICIONAR LIVRO -->
+  <div id="adicionar-livro" class="secao">
+    <div class="cabecalho-dashboard"><h1>Adicionar Novo livro</h1></div>
+    <div class="formulario-livro">
+      <form id="form-livro">
+        <!-- Campo para colar ID do Google Books -->
+        <div class="campo">
+          <label for="googleBooksIdInput">Colar ID Google Books:</label>
+          <input type="text" id="googleBooksIdInput" placeholder="Cole o ID aqui" />
+          <button type="button" onclick="preencherFormularioPorId()">Buscar</button>
+        </div>
 
-          const todasAsSecoes = document.querySelectorAll(".secao");
+        <div class="campo">
+          <label for="title">Título: </label>
+          <input type="text" id="title" name="title" required />
+        </div>
 
-          todasAsSecoes.forEach((secao) => {
-            secao.classList.remove("ativa"); // ← CORREÇÃO AQUI
-          });
+        <div class="campo">
+          <label for="author">Autor: </label>
+          <input type="text" id="author" name="author" required />
+        </div>
 
-          const secaoEscolhida = document.getElementById(novaSecao);
-          secaoEscolhida.classList.add("ativa");
-        }
+        <div class="campo">
+          <label for="publisher">Editora: </label>
+          <input type="text" id="publisher" name="publisher" required />
+        </div>
 
-        // deixa a função acessível globalmente
-        window.trocarSecao = trocarSecao;
+        <div class="campo">
+          <label for="publishedDate">Ano de publicação: </label>
+          <input type="number" id="publishedDate" name="publishedDate" required />
+        </div>
 
-        // botão sair
-        document.getElementById("sair").addEventListener("click", () => {
-          window.location.href = "index.html";
-        });
-      });
+        <div class="campo">
+          <label for="isbn">ISBN: </label>
+          <input type="text" id="isbn" name="isbn" required />
+        </div>
 
-      // ============ FUNCIONALIDADE DO FORMULÁRIO
-      document.getElementById('form-livro').addEventListener('submit', function() {
-        event.preventDefault();
+        <div class="campo">
+          <label for="description">Descrição: </label>
+          <input type="text" id="description" name="description" required />
+        </div>
 
-        console.log('Enviando livros para o backend');
+        <div class="campo">
+          <label for="pageCount">Número de páginas: </label>
+          <input type="number" id="pageCount" name="pageCount" required />
+        </div>
 
-        const formData = new FormData(this);
+        <div class="campo">
+          <label for="googleBooksId">Id Google: </label>
+          <input type="text" id="googleBooksId" name="googleBooksId" readonly />
+        </div>
 
-        const bookData = {
-            title: formData.get('title'),
-        authors: formData.get('author'), // Note: sua API espera "authors"
-        publisher: formData.get('publisher'),
-        publishedDate: formData.get('publishedDate'),
-        isbn10: formData.get('isbn'), // Você só tem um campo ISBN, vou colocar no isbn10
-        isbn13: null, // ou formData.get('isbn13') se você adicionar o campo
-        description: formData.get('description'),
-        pageCount: formData.get('pageCount') ? parseInt(formData.get('pageCount')) : null,
-        googleBooksId: formData.get('googleBooksId'),
-        status: 'AVAILABLE' // Sempre AVAILABLE quando criar
-        };
+        <div class="caixa-botoes">
+          <button type="button" onclick="trocarSecao('livros')" class="botao-voltar">← Voltar</button>
+          <button type="submit" class="botaoo-salvar">💾 Salvar Livro</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-            console.log('📋 Dados a serem enviados:', bookData);
+  <!-- SECAO LISTAR LIVROS -->
+  <div id="listar-livros" class="secao">
+    <div class="cabecalho-dashboard"><h1>Lista de livros</h1></div>
+    <div class="acoes-lista">
+      <button type="button" onclick="trocarSecao('livros')" class="botao-voltar">← Voltar</button>
+      <button type="button" onclick="listarLivros()" class="botao-atualizar">Atualizar</button>
+    </div>
 
-            const token = localStorage.getItem('authToken');
+    <!-- Campo de busca no Google Books para a listagem -->
+    <div class="buscar-google">
+      <input type="text" id="google-query" placeholder="Pesquisar no Google Books" />
+      <button type="button" onclick="buscarGoogleBooks()">Buscar</button>
+    </div>
 
-            if(!token){
-                alert('Erro: Você precisa estar logado para criar livros');
-            }
+    <div id="lista-livros-container"></div>
+  </div>
 
+  <div id="emprestimos" class="secao"><div class="cabecalho-dashboard"><h1>Gerenciar Empréstimos</h1></div></div>
+  <div id="usuarios" class="secao"><div class="cabecalho-dashboard"><h1>Gerenciar Usuários</h1></div></div>
+</div>
 
-            fetch('http://localhost:8080/api/books/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/json',
-                    'Authorization': 'Bearer ${token}'
-                },
-                body: JSON.stringify(bookData)
-            })
-            .then(Response => {
-                if(Response.ok){
-                    return Response.json();
-                }else{
-                    throw new Error('Erro HTTP: ${response.status}');
-                }
-            })
-
-            .then(data => {
-                console.log('Livro criado', data);
-                alert('Livro "${data.title}" cadastrado com sucesso!`');
-
-                document.getElementById('form-livro').reset();
-                trocarSecao('livros');
-            })
-           
-            .catch(error => {
-                console.error('❌ Erro:', error);
-        alert('❌ Erro ao criar livro. Verifique os dados!');
-    });
+<script>
+// Trocar seções
+document.addEventListener("DOMContentLoaded", function () {
+  function trocarSecao(novaSecao) {
+    document.querySelectorAll(".secao").forEach(secao => secao.classList.remove("ativa"));
+    document.getElementById(novaSecao).classList.add("ativa");
+  }
+  window.trocarSecao = trocarSecao;
+  document.getElementById("sair").addEventListener("click", () => { window.location.href = "index.html"; });
 });
-    </script>
-  </body>
+
+// Criar livro
+document.getElementById('form-livro').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const formData = new FormData(this);
+  const bookData = {
+    googleBooksId: formData.get('googleBooksId'),
+    title: formData.get('title'),
+    authors: formData.get('author'),
+    publisher: formData.get('publisher'),
+    publishedDate: formData.get('publishedDate'),
+    isbn10: formData.get('isbn'),
+    isbn13: null,
+    description: formData.get('description'),
+    pageCount: formData.get('pageCount') ? parseInt(formData.get('pageCount')) : null,
+    status: 'AVAILABLE'
+  };
+
+  const token = localStorage.getItem('token');
+  if(!token){ alert('Erro: Você precisa estar logado.'); return; }
+
+  fetch('http://localhost:8080/api/books/create', {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${token}` },
+    body: JSON.stringify(bookData)
+  })
+  .then(res => res.ok ? res.json() : Promise.reject(`Erro HTTP: ${res.status}`))
+  .then(data => { alert(`Livro "${data.title}" cadastrado com sucesso!`); this.reset(); trocarSecao('livros'); })
+  .catch(err => { console.error(err); alert('Erro ao criar livro!'); });
+});
+
+// Listar livros
+async function listarLivros() {
+  const token = localStorage.getItem('token');
+  if (!token) { alert('Erro: Você precisa estar logado'); return; }
+  try {
+    const res = await fetch('http://localhost:8080/api/books/list', {
+      method: 'GET',
+      headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`);
+    const livros = await res.json();
+    renderizarLivros(livros);
+  } catch(err) { console.error(err); alert('Erro ao carregar livros'); }
+}
+
+function renderizarLivros(livros) {
+  const container = document.getElementById('lista-livros-container');
+  if (!container) return;
+  if(livros.length===0){
+    container.innerHTML = `<div class="mensagem-vazia"><h3>Nenhum livro encontrado</h3><p>Adicione seu primeiro livro à biblioteca!</p></div>`;
+    return;
+  }
+  container.innerHTML = livros.map(l => `
+    <div class="card-livro">
+      <h3 class="livro-titulo">${l.title || 'Título não informado'}</h3>
+      <div class="livro-info">
+        <p><strong>👤 ID:</strong> ${l.googleBooksId || 'Não informado'}</p>
+        <p><strong>👤 Autor(es):</strong> ${l.authors || 'Não informado'}</p>
+        <p><strong>🏢 Editora:</strong> ${l.publisher || 'Não informado'}</p>
+        <p><strong>📅 Data de Publicação:</strong> ${l.publishedDate || 'Não informado'}</p>
+        <p><strong>📄 Páginas:</strong> ${l.pageCount || 'Não informado'}</p>
+        <p><strong>📚 ISBN-10:</strong> ${l.isbn10 || 'Não informado'}</p>
+        <p><strong>📚 ISBN-13:</strong> ${l.isbn13 || 'Não informado'}</p>
+      </div>
+      <div class="livro-descricao">
+        <p><strong>📖 Descrição:</strong></p>
+        <p class="descricao-texto">${l.description || 'Sem descrição disponível'}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Buscar Google Books pelo ID para preencher formulário
+async function preencherFormularioPorId() {
+  const id = document.getElementById('googleBooksIdInput').value.trim();
+  if(!id){ alert('Cole um ID válido!'); return; }
+
+  try {
+    const res = await fetch(`https://www.googleapis.com/books/v1/volumes/${encodeURIComponent(id)}`);
+    if(!res.ok) throw new Error('Livro não encontrado');
+    const data = await res.json();
+    const v = data.volumeInfo;
+
+    document.getElementById('title').value = v.title || '';
+    document.getElementById('author').value = v.authors ? v.authors.join(', ') : '';
+    document.getElementById('publisher').value = v.publisher || '';
+    document.getElementById('publishedDate').value = v.publishedDate ? parseInt(v.publishedDate) : '';
+    document.getElementById('isbn').value = v.industryIdentifiers?.find(i=>i.type==='ISBN_10')?.identifier || '';
+    document.getElementById('description').value = v.description || '';
+    document.getElementById('pageCount').value = v.pageCount || '';
+    document.getElementById('googleBooksId').value = data.id;
+  } catch(err){ console.error(err); alert('Erro ao buscar no Google Books'); }
+}
+
+// Buscar Google Books na listagem (para exibir livros na tela)
+async function buscarGoogleBooks() {
+  const query = document.getElementById('google-query').value.trim();
+  if(!query){ alert('Digite algo para buscar!'); return; }
+
+  try {
+    const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    if(!data.items){ alert('Nenhum livro encontrado'); return; }
+
+    const livros = data.items.map(item => {
+      const v = item.volumeInfo;
+      return {
+        googleBooksId: item.id,
+        title: v.title || '',
+        authors: v.authors ? v.authors.join(', ') : '',
+        publisher: v.publisher || '',
+        publishedDate: v.publishedDate || '',
+        description: v.description || '',
+        pageCount: v.pageCount || null,
+        isbn10: v.industryIdentifiers?.find(i=>i.type==='ISBN_10')?.identifier || '',
+        isbn13: v.industryIdentifiers?.find(i=>i.type==='ISBN_13')?.identifier || ''
+      };
+    });
+
+    renderizarLivros(livros);
+  } catch(err){ console.error(err); alert('Erro ao buscar no Google Books'); }
+}
+</script>
+</body>
 </html>
