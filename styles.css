@@ -402,7 +402,7 @@ body.dashboard {
     margin-bottom: 20px;
 }
 
-.botao-voltar, .botao-atualizar, .botao {
+.botao-voltar, .botao-atualizar, .botao-google, .botao {
     background: #103f49;
     color: white;
     padding: 8px 16px;
@@ -411,7 +411,7 @@ body.dashboard {
     cursor: pointer;
 }
 
-.botao-voltar:hover, .botao-atualizar:hover {
+.botao-voltar:hover, .botao-atualizar, .botao-google:hover {
     background: #145c66;
 }
 

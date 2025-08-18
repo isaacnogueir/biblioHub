@@ -47,12 +47,13 @@
   <div id="adicionar-livro" class="secao">
     <div class="cabecalho-dashboard"><h1>Adicionar Novo livro</h1></div>
     <div class="formulario-livro">
+      
       <form id="form-livro">
-        <!-- Campo para colar ID do Google Books -->
+     
         <div class="campo">
           <label for="googleBooksIdInput">Colar ID Google Books:</label>
           <input type="text" id="googleBooksIdInput" placeholder="Cole o ID aqui" />
-          <button type="button" onclick="preencherFormularioPorId()">Buscar</button>
+          <button type="button" onclick="preencherFormularioPorId()" class="botao-google">Buscar</button>
         </div>
 
         <div class="campo">
@@ -112,9 +113,9 @@
     </div>
 
     <!-- Campo de busca no Google Books para a listagem -->
-    <div class="buscar-google">
+    <div class="campo">
       <input type="text" id="google-query" placeholder="Pesquisar no Google Books" />
-      <button type="button" onclick="buscarGoogleBooks()">Buscar</button>
+      <button type="button" onclick="buscarGoogleBooks()" class="botao-google">Buscar</button>
     </div>
 
     <div id="lista-livros-container"></div>
@@ -191,16 +192,16 @@ function renderizarLivros(livros) {
     <div class="card-livro">
       <h3 class="livro-titulo">${l.title || 'Título não informado'}</h3>
       <div class="livro-info">
-        <p><strong>👤 ID:</strong> ${l.googleBooksId || 'Não informado'}</p>
-        <p><strong>👤 Autor(es):</strong> ${l.authors || 'Não informado'}</p>
-        <p><strong>🏢 Editora:</strong> ${l.publisher || 'Não informado'}</p>
-        <p><strong>📅 Data de Publicação:</strong> ${l.publishedDate || 'Não informado'}</p>
-        <p><strong>📄 Páginas:</strong> ${l.pageCount || 'Não informado'}</p>
-        <p><strong>📚 ISBN-10:</strong> ${l.isbn10 || 'Não informado'}</p>
-        <p><strong>📚 ISBN-13:</strong> ${l.isbn13 || 'Não informado'}</p>
+        <p><strong>ID:</strong> ${l.googleBooksId || 'Não informado'}</p>
+        <p><strong>Autor(es):</strong> ${l.authors || 'Não informado'}</p>
+        <p><strong>Editora:</strong> ${l.publisher || 'Não informado'}</p>
+        <p><strong>Data de Publicação:</strong> ${l.publishedDate || 'Não informado'}</p>
+        <p><strong>Páginas:</strong> ${l.pageCount || 'Não informado'}</p>
+        <p><strong>ISBN-10:</strong> ${l.isbn10 || 'Não informado'}</p>
+        <p><strong>ISBN-13:</strong> ${l.isbn13 || 'Não informado'}</p>
       </div>
       <div class="livro-descricao">
-        <p><strong>📖 Descrição:</strong></p>
+        <p><strong> Descrição:</strong></p>
         <p class="descricao-texto">${l.description || 'Sem descrição disponível'}</p>
       </div>
     </div>
@@ -226,7 +227,7 @@ async function preencherFormularioPorId() {
     document.getElementById('description').value = v.description || '';
     document.getElementById('pageCount').value = v.pageCount || '';
     document.getElementById('googleBooksId').value = data.id;
-  } catch(err){ console.error(err); alert('Erro ao buscar no Google Books'); }
+  } catch(err){ console.error(err); alert('Erro ao buscar no Google Book!'); }
 }
 
 // Buscar Google Books na listagem (para exibir livros na tela)
