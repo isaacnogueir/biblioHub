@@ -91,11 +91,6 @@
           <input type="number" id="pageCount" name="pageCount" required />
         </div>
 
-        <div class="campo">
-          <label for="googleBooksId">Id Google: </label>
-          <input type="text" id="googleBooksId" name="googleBooksId" readonly />
-        </div>
-
         <div class="caixa-botoes">
           <button type="button" onclick="trocarSecao('livros')" class="botao-voltar">← Voltar</button>
           <button type="submit" class="botaoo-salvar">💾 Salvar Livro</button>
@@ -192,7 +187,7 @@ function renderizarLivros(livros) {
     <div class="card-livro">
       <h3 class="livro-titulo">${l.title || 'Título não informado'}</h3>
       <div class="livro-info">
-        <p><strong>ID:</strong> ${l.googleBooksId || 'Não informado'}</p>
+        <p><strong>ID:</strong> ${l.googleBooksId || l.id || 'Não informado'}</p>
         <p><strong>Autor(es):</strong> ${l.authors || 'Não informado'}</p>
         <p><strong>Editora:</strong> ${l.publisher || 'Não informado'}</p>
         <p><strong>Data de Publicação:</strong> ${l.publishedDate || 'Não informado'}</p>
@@ -226,7 +221,7 @@ async function preencherFormularioPorId() {
     document.getElementById('isbn').value = v.industryIdentifiers?.find(i=>i.type==='ISBN_10')?.identifier || '';
     document.getElementById('description').value = v.description || '';
     document.getElementById('pageCount').value = v.pageCount || '';
-    document.getElementById('googleBooksId').value = data.id;
+   
   } catch(err){ console.error(err); alert('Erro ao buscar no Google Book!'); }
 }
 

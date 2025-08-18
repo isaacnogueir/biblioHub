@@ -195,7 +195,7 @@ body.dashboard {
     transform: translateY(-2px);
 }
 
-/* ==================== DASHBOARD SIMPLES ==================== */
+/* ==================== DASHBOARD ==================== */
 .dashboard-container {
     max-width: 1000px;
     margin: 20px auto;
@@ -269,7 +269,7 @@ body.dashboard {
     gap: 20px;
 }
 
-/* ==================== FORMULÁRIO DE LIVROS (usando classes existentes) ==================== */
+/* ==================== FORMULÁRIO DE LIVROS ==================== */
 .formulario-livro {
     max-width: 600px;
     margin: 0 auto;
@@ -287,7 +287,6 @@ body.dashboard {
     font-size: 14px;
 }
 
-/* Seus inputs já têm estilo em .caixa-formulario input, vamos reaproveitar */
 .campo input,
 .campo select,
 .campo textarea {
@@ -393,9 +392,6 @@ body.dashboard {
     }
 }
 
-/* Lista de Livros - Versão Simples */
-
-/* Ações no topo */
 .acoes-lista {
     display: flex;
     gap: 10px;
@@ -415,14 +411,12 @@ body.dashboard {
     background: #145c66;
 }
 
-/* Grid da lista */
 .lista-livros {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-/* Card do livro */
 .card-livro {
     background: white;
     padding: 20px;
@@ -435,7 +429,6 @@ body.dashboard {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Título */
 .livro-titulo {
     color: #103f49;
     font-size: 1.3em;
@@ -443,7 +436,6 @@ body.dashboard {
     margin-bottom: 15px;
 }
 
-/* Informações */
 .livro-info p {
     color: #666;
     margin-bottom: 8px;
@@ -455,7 +447,6 @@ body.dashboard {
     font-weight: 600;
 }
 
-/* Descrição */
 .livro-descricao {
     margin-top: 15px;
     padding-top: 15px;
@@ -474,7 +465,6 @@ body.dashboard {
     font-style: italic;
 }
 
-/* Botões de ação */
 .card-acoes {
     display: flex;
     gap: 8px;
@@ -495,7 +485,6 @@ body.dashboard {
 .botao-editar { background: #ffc107; color: #212529; }
 .botao-excluir { background: #dc3545; color: white; }
 
-/* Estados especiais */
 .mensagem-vazia, .carregamento, .erro-livros {
     text-align: center;
     padding: 40px 20px;
@@ -518,7 +507,6 @@ body.dashboard {
     cursor: pointer;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
     .lista-livros {
         grid-template-columns: 1fr;
