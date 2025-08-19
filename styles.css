@@ -332,6 +332,17 @@ body.dashboard {
     }
 }
 
+.linha{
+    display: flex;
+    gap: 20px;
+}
+
+.campos-linha{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 /* ==================== RESPONSIVO ==================== */
 @media (max-width: 768px) {
     .navbar {
@@ -395,10 +406,10 @@ body.dashboard {
 .acoes-lista {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
-.botao-voltar, .botao-atualizar, .botao-google, .botao {
+.botao-voltar, .botao-atualizar, .botao-google, .botao-disponiveis, .botao {
     background: #103f49;
     color: white;
     padding: 8px 16px;
@@ -407,7 +418,7 @@ body.dashboard {
     cursor: pointer;
 }
 
-.botao-voltar:hover, .botao-atualizar, .botao-google:hover {
+.botao-voltar:hover, .botao-atualizar, .botao-google, .botao-disponiveis:hover {
     background: #145c66;
 }
 

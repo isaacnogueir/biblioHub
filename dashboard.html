@@ -22,7 +22,7 @@
 <div class="dashboard-container">
   <!-- SECAO HOME -->
   <div id="home" class="secao ativa">
-    <div class="cabecalho-dashboard"><h1>Bem vindo à Biblioteca virtual</h1></div>
+    <div class="cabecalho-dashboard"><h1>Bem-vindo à Biblioteca Virtual</h1></div>
     <p>Escolha uma opção do menu acima para começar.</p>
   </div>
 
@@ -36,7 +36,7 @@
         <button onclick="trocarSecao('adicionar-livro')">Adicionar</button>
       </div>
       <div class="card">
-        <h3>Ver todos</h3>
+        <h3>Ver Todos</h3>
         <p>Lista completa</p>
         <button onclick="trocarSecao('listar-livros'); listarLivros();">Ver Lista</button>
       </div>
@@ -45,49 +45,47 @@
 
   <!-- SECAO ADICIONAR LIVRO -->
   <div id="adicionar-livro" class="secao">
-    <div class="cabecalho-dashboard"><h1>Adicionar Novo livro</h1></div>
+    <div class="cabecalho-dashboard"><h1>Adicionar Novo Livro</h1></div>
     <div class="formulario-livro">
-      
       <form id="form-livro">
-     
         <div class="campo">
           <label for="googleBooksIdInput">Colar ID Google Books:</label>
-          <input type="text" id="googleBooksIdInput" placeholder="Cole o ID aqui" />
+          <input type="text" id="googleBooksIdInput" name="googleBooksId" placeholder="Cole o ID aqui" />
           <button type="button" onclick="preencherFormularioPorId()" class="botao-google">Buscar</button>
         </div>
 
         <div class="campo">
-          <label for="title">Título: </label>
+          <label for="title">Título:</label>
           <input type="text" id="title" name="title" required />
         </div>
 
         <div class="campo">
-          <label for="author">Autor: </label>
+          <label for="author">Autor:</label>
           <input type="text" id="author" name="author" required />
         </div>
 
         <div class="campo">
-          <label for="publisher">Editora: </label>
+          <label for="publisher">Editora:</label>
           <input type="text" id="publisher" name="publisher" required />
         </div>
 
         <div class="campo">
-          <label for="publishedDate">Ano de publicação: </label>
+          <label for="publishedDate">Ano de publicação:</label>
           <input type="number" id="publishedDate" name="publishedDate" required />
         </div>
 
         <div class="campo">
-          <label for="isbn">ISBN: </label>
+          <label for="isbn">ISBN:</label>
           <input type="text" id="isbn" name="isbn" required />
         </div>
 
         <div class="campo">
-          <label for="description">Descrição: </label>
+          <label for="description">Descrição:</label>
           <input type="text" id="description" name="description" required />
         </div>
 
         <div class="campo">
-          <label for="pageCount">Número de páginas: </label>
+          <label for="pageCount">Número de páginas:</label>
           <input type="number" id="pageCount" name="pageCount" required />
         </div>
 
@@ -101,17 +99,25 @@
 
   <!-- SECAO LISTAR LIVROS -->
   <div id="listar-livros" class="secao">
-    <div class="cabecalho-dashboard"><h1>Lista de livros</h1></div>
+    <div class="cabecalho-dashboard"><h1>Lista de Livros</h1></div>
     <div class="acoes-lista">
       <button type="button" onclick="trocarSecao('livros')" class="botao-voltar">← Voltar</button>
       <button type="button" onclick="listarLivros()" class="botao-atualizar">Atualizar</button>
+        <button type="button" onclick="listarLivrosDisponiveis()" class="botao-disponiveis">Livros disponíveis</button>
     </div>
 
-    <!-- Campo de busca no Google Books para a listagem -->
-    <div class="campo">
-      <input type="text" id="google-query" placeholder="Pesquisar no Google Books" />
-      <button type="button" onclick="buscarGoogleBooks()" class="botao-google">Buscar</button>
-    </div>
+    <div class="linha">
+  <input type="text" id="google-query" placeholder="Pesquisar no Google Books" onkeydown="if(event.key==='Enter'){buscarGoogleBooks()}" />
+
+  <input type="number" id="book-id" placeholder="Digite o ID do livro" onkeydown="if(event.key==='Enter'){buscarLivroPorId()}" />
+
+  <input type="text" id="book-isbn" placeholder="Digite o ISBN do livro" onkeydown="if(event.key==='Enter'){BuscarLivroPorIsbn()}" />
+  
+  <input type="text" id="book-name" placeholder="Digite o nome do livro" onkeydown="if(event.key=='Enter'){buscarLivroPorNome()}" />
+
+  
+
+</div>
 
     <div id="lista-livros-container"></div>
   </div>
@@ -149,11 +155,11 @@ document.getElementById('form-livro').addEventListener('submit', function(event)
   };
 
   const token = localStorage.getItem('token');
-  if(!token){ alert('Erro: Você precisa estar logado.'); return; }
+  if (!token) { alert('Erro: Você precisa estar logado.'); return; }
 
   fetch('http://localhost:8080/api/books/create', {
     method: 'POST',
-    headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
     body: JSON.stringify(bookData)
   })
   .then(res => res.ok ? res.json() : Promise.reject(`Erro HTTP: ${res.status}`))
@@ -164,25 +170,27 @@ document.getElementById('form-livro').addEventListener('submit', function(event)
 // Listar livros
 async function listarLivros() {
   const token = localStorage.getItem('token');
-  if (!token) { alert('Erro: Você precisa estar logado'); return; }
+  if (!token) { alert('Erro: Você precisa estar logado.'); return; }
   try {
     const res = await fetch('http://localhost:8080/api/books/list', {
       method: 'GET',
-      headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` }
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
     });
     if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`);
     const livros = await res.json();
     renderizarLivros(livros);
-  } catch(err) { console.error(err); alert('Erro ao carregar livros'); }
+  } catch (err) { console.error(err); alert('Erro ao carregar livros'); }
 }
 
 function renderizarLivros(livros) {
   const container = document.getElementById('lista-livros-container');
   if (!container) return;
-  if(livros.length===0){
-    container.innerHTML = `<div class="mensagem-vazia"><h3>Nenhum livro encontrado</h3><p>Adicione seu primeiro livro à biblioteca!</p></div>`;
+
+  if (!livros || livros.length === 0) {
+    container.innerHTML = `<div class="mensagem-vazia"><h3>nenhum livro encontrado</h3><p>Adicione seu primeiro livro à biblioteca!</p></div>`;
     return;
   }
+
   container.innerHTML = livros.map(l => `
     <div class="card-livro">
       <h3 class="livro-titulo">${l.title || 'Título não informado'}</h3>
@@ -196,21 +204,22 @@ function renderizarLivros(livros) {
         <p><strong>ISBN-13:</strong> ${l.isbn13 || 'Não informado'}</p>
       </div>
       <div class="livro-descricao">
-        <p><strong> Descrição:</strong></p>
+        <p><strong>Descrição:</strong></p>
         <p class="descricao-texto">${l.description || 'Sem descrição disponível'}</p>
       </div>
     </div>
   `).join('');
 }
 
-// Buscar Google Books pelo ID para preencher formulário
+
+// Preencher formulário com Google Books ID
 async function preencherFormularioPorId() {
   const id = document.getElementById('googleBooksIdInput').value.trim();
-  if(!id){ alert('Cole um ID válido!'); return; }
+  if (!id) { alert('Insira um ID válido!'); return; }
 
   try {
     const res = await fetch(`https://www.googleapis.com/books/v1/volumes/${encodeURIComponent(id)}`);
-    if(!res.ok) throw new Error('Livro não encontrado');
+    if (!res.ok) throw new Error('Livro não encontrado');
     const data = await res.json();
     const v = data.volumeInfo;
 
@@ -218,22 +227,21 @@ async function preencherFormularioPorId() {
     document.getElementById('author').value = v.authors ? v.authors.join(', ') : '';
     document.getElementById('publisher').value = v.publisher || '';
     document.getElementById('publishedDate').value = v.publishedDate ? parseInt(v.publishedDate) : '';
-    document.getElementById('isbn').value = v.industryIdentifiers?.find(i=>i.type==='ISBN_10')?.identifier || '';
+    document.getElementById('isbn').value = v.industryIdentifiers?.find(i => i.type === 'ISBN_10')?.identifier || '';
     document.getElementById('description').value = v.description || '';
     document.getElementById('pageCount').value = v.pageCount || '';
-   
-  } catch(err){ console.error(err); alert('Erro ao buscar no Google Book!'); }
+  } catch (err) { console.error(err); alert('Erro ao buscar no Google Books!'); }
 }
 
-// Buscar Google Books na listagem (para exibir livros na tela)
+// Buscar Google Books
 async function buscarGoogleBooks() {
   const query = document.getElementById('google-query').value.trim();
-  if(!query){ alert('Digite algo para buscar!'); return; }
+  if (!query) { alert('Digite algo para buscar!'); return; }
 
   try {
     const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`);
     const data = await res.json();
-    if(!data.items){ alert('Nenhum livro encontrado'); return; }
+    if (!data.items) { alert('Nenhum livro encontrado'); return; }
 
     const livros = data.items.map(item => {
       const v = item.volumeInfo;
@@ -245,14 +253,181 @@ async function buscarGoogleBooks() {
         publishedDate: v.publishedDate || '',
         description: v.description || '',
         pageCount: v.pageCount || null,
-        isbn10: v.industryIdentifiers?.find(i=>i.type==='ISBN_10')?.identifier || '',
-        isbn13: v.industryIdentifiers?.find(i=>i.type==='ISBN_13')?.identifier || ''
+        isbn10: v.industryIdentifiers?.find(i => i.type === 'ISBN_10')?.identifier || '',
+        isbn13: v.industryIdentifiers?.find(i => i.type === 'ISBN_13')?.identifier || ''
       };
     });
 
     renderizarLivros(livros);
-  } catch(err){ console.error(err); alert('Erro ao buscar no Google Books'); }
+  } catch (err) { console.error(err); alert('Erro ao buscar no Google Books'); }
 }
+
+// Buscar por ID na API local
+async function buscarLivroPorId() {
+  const query = document.getElementById('book-id').value.trim();
+  if (!query) {
+    alert('Digite um ID válido!');
+    return;
+  }
+
+  const token = localStorage.getItem('token');
+  try {
+    const res = await fetch(`http://localhost:8080/api/books/${encodeURIComponent(query)}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!res.ok) {
+      alert('Nenhum livro encontrado com esse ID!');
+      return;
+    }
+
+    const livro = await res.json();
+    renderizarLivros([livro]);
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao buscar livro por ID!");
+  }
+}
+
+    async function BuscarLivroPorIsbn() {
+        const query = document.getElementById('book-isbn').value.trim();
+        if (!query){
+            alert('Digite um ISBN válido');
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        try{
+            const res = await fetch(`http://localhost:8080/api/books/isbn/${encodeURIComponent(query)}`, {
+           method: 'GET',
+           headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+            });
+
+            if(!res.ok){
+                alert('Nenhum livro encontrado com esse ISBN');
+                return;
+            }
+
+            const livros = await res.json();
+            renderizarLivros([livros]);
+        }catch(err){
+            console.error(err);
+            alert('Erro ao buscar livro por ISBN');
+        }   
+    }
+  async function buscarLivroPorNome() {
+      const query = document.getElementById('book-name').value.trim();
+    if(!query){
+        alert('Digite um nome válido!');
+        return;
+    }
+
+    const token = localStorage.getItem('token');
+    try{
+        const res = await fetch(`http://localhost:8080/api/books/title/${encodeURIComponent(query)}`, {
+         headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+            });
+
+            if(!res.ok){
+                alert('Nenhum livro encontrado com esse nome!');
+                return;
+            }
+
+            const livros = await res.json();
+            renderizarLivros([livros]);
+        }catch(err){
+            console.error(err);
+            alert('Erro ao buscar livro por nome');
+        }  
+    } 
+  
+    async function listarLivrosDisponiveis() {
+      const token = localStorage.getItem('token');
+    
+      try{
+        const res = await fetch('http://localhost:8080/api/books/available', {
+          method: 'GET',
+          headers:{'Content-Type': 'application/json','Authorization': `Bearer ${token}`}
+        });
+
+        if(!res.ok){
+          alert('Erro ao buscar livros disponiveis');
+          return;
+        }
+
+   const livros = await res.json();
+    if (!Array.isArray(livros)) {
+      renderizarLivros([livros]); // caso venha 1 único livro
+    } else {
+      renderizarLivros(livros);
+    }
+
+  } catch(err) {
+    console.error(err);
+    alert('Erro ao buscar livros disponíveis');
+  }
+}
+
+async function listarLivrosDisponiveis() {
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch('http://localhost:8080/api/books/available', {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`}
+    });
+
+    if (!res.ok) {
+      alert('Erro ao buscar livros disponíveis');
+      return;
+    }
+
+    const livros = await res.json();
+    renderizarLivros(livros); // sempre uma lista
+  } catch (err) {
+    console.error(err);
+    alert('Erro ao buscar livros disponíveis');
+  }
+}
+
+async function buscarLivroPorNome() {
+  const query = document.getElementById('book-name').value.trim();
+  if (!query) {
+    alert('Digite um nome válido!');
+    return;
+  }
+
+  const token = localStorage.getItem('token');
+  try {
+    const res = await fetch(`http://localhost:8080/api/books/title/${encodeURIComponent(query)}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!res.ok) {
+      alert('Nenhum livro encontrado com esse nome!');
+      return;
+    }
+
+    const livros = await res.json();
+
+    if (!Array.isArray(livros)) {
+      renderizarLivros([livros]);
+    } else {
+      renderizarLivros(livros);
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert('Erro ao buscar livro por nome');
+  }
+}
+
+
 </script>
 </body>
 </html>
