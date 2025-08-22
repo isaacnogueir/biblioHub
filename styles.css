@@ -270,7 +270,7 @@ body.dashboard {
 }
 
 /* ==================== FORMULÁRIO DE LIVROS ==================== */
-.formulario-livro {
+.formulario-livro, .formulario-usuario {
     max-width: 600px;
     margin: 0 auto;
 }
@@ -422,13 +422,13 @@ body.dashboard {
     background: #145c66;
 }
 
-.lista-livros {
+.lista-livros, .lista-usuarios {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-.card-livro {
+.card-livro, .card-usuario {
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -436,7 +436,7 @@ body.dashboard {
     border-left: 3px solid #103f49;
 }
 
-.card-livro:hover {
+.card-livro, .card-usuario:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
@@ -519,7 +519,7 @@ body.dashboard {
 }
 
 @media (max-width: 768px) {
-    .lista-livros {
+    .lista-livros, .lista-usuarios {
         grid-template-columns: 1fr;
         gap: 15px;
     }
